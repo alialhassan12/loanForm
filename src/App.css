@@ -53,11 +53,24 @@ input{
   padding: 10px;
   font-size: 15px;
   height: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 3px;
 }
+select{
+  height: 40px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 3px;
 
+}
 .checkBox{
   height: 25px;
   width: 25px;
+  cursor: pointer;
 }
 
 .submitBtn{
@@ -66,4 +79,22 @@ input{
   align-items: center;
   justify-content: center;
   display: flex;
+}
+/* PopUp */
+#popUp{
+  position: absolute;
+  transform: translateY(-97.5vh) translateX(-40px);
+  height: 100vh;
+  width:1305px;
+  background-color: #00000059;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.popUpContent{
+  background-color: rgb(255, 255, 255);
+  color: green;
+  border-radius:10px ;
+  padding: 10px;
 }
