@@ -1,14 +1,16 @@
 import PopUp from './PopUp';
-import {useState} from 'react';
+import {useState,useContext} from 'react';
 import TextInputContainer from './TextInputContainer';
-import { formInputs } from './contexts/formInputContext';
+import {formInputs} from './contexts/formInputContext';
+import { userContext } from './contexts/userContext';
 
 export default function Form(){
+    const userData=useContext(userContext);
     const [popUp,setPopup]=useState({isVisible:false,message:""});
     const [formFilds,setFormFields]=useState({
-        name:"",
-        phoneNumber:"",
-        age:"",
+        name:userData.name,
+        phoneNumber:userData.phoneNumber,
+        age:userData.age,
         isEmployeed:false,
         salary:"500"
     });
@@ -30,6 +32,8 @@ export default function Form(){
             }
         }}>
         <h1 className="formTitle">Requisting A Loan</h1>
+        <hr />
+        <h2>Hello {userData.name}</h2>
         <hr />
         <form onSubmit={(e)=>{
             e.preventDefault();
