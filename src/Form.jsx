@@ -1,5 +1,6 @@
 import PopUp from './PopUp';
 import {useState} from 'react';
+import TextInput from './TextInput';
 
 export default function Form(){
     const [popUp,setPopup]=useState({isVisible:false,message:""});
@@ -10,6 +11,17 @@ export default function Form(){
         isEmployeed:false,
         salary:"500"
     });
+
+    function handleNameTextChange(value){
+        setFormFields({...formFilds,name:value});
+    }
+    function handlePhoneNumberTextChange(value){
+        setFormFields({...formFilds,phoneNumber:value});
+    }
+    function handleAgeTextChange(value){
+        setFormFields({...formFilds,age:value});
+    }
+
     return(
         <div onClick={()=>{
             if(popUp){
@@ -18,29 +30,29 @@ export default function Form(){
         }}>
         <h1 className="formTitle">Requisting A Loan</h1>
         <hr />
-        <form action="" onSubmit={(e)=>{
+        <form onSubmit={(e)=>{
             e.preventDefault();
+            console.log(formFilds);
             let message=inputValidation();
             setPopup({isVisible:true,message:message});
         }}>
+            <TextInput 
+                labelName="Name:"
+                value={formFilds.name} 
+                handleChange={handleNameTextChange}
+            />
 
-            <label >Name:</label>
-            <input type="text" value={formFilds.name} 
-            onChange={e=>{
-                setFormFields({...formFilds,name:e.target.value});
-            }}/>
+            <TextInput 
+                labelName="Phone Number:"
+                value={formFilds.phoneNumber} 
+                handleChange={handlePhoneNumberTextChange}
+            />
 
-            <label >Phone Number:</label>
-            <input type="text" value={formFilds.phoneNumber}
-            onChange={e=>{
-                setFormFields({...formFilds,phoneNumber:e.target.value});
-            }}/>
-
-            <label >Age:</label>
-            <input type="text" value={formFilds.age}
-            onChange={e=>{
-                setFormFields({...formFilds,age:e.target.value});
-            }}/>
+            <TextInput 
+                labelName="Age:"
+                value={formFilds.age} 
+                handleChange={handleAgeTextChange}
+            />
 
             <label >Are you employeed?</label>
             <input className="checkBox" type="checkbox" checked={formFilds.isEmployeed}
