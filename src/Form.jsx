@@ -1,6 +1,7 @@
 import PopUp from './PopUp';
 import {useState} from 'react';
-import TextInput from './TextInput';
+import TextInputContainer from './TextInputContainer';
+import { formInputs } from './contexts/formInputContext';
 
 export default function Form(){
     const [popUp,setPopup]=useState({isVisible:false,message:""});
@@ -36,23 +37,30 @@ export default function Form(){
             let message=inputValidation();
             setPopup({isVisible:true,message:message});
         }}>
-            <TextInput 
-                labelName="Name:"
-                value={formFilds.name} 
-                handleChange={handleNameTextChange}
-            />
+            <formInputs.Provider
+            value={{
+                labelName:"name:",
+                handleChange:handleNameTextChange,
+                value:formFilds.name,
+            }}>
+                <TextInputContainer />
+            </formInputs.Provider>
 
-            <TextInput 
-                labelName="Phone Number:"
-                value={formFilds.phoneNumber} 
-                handleChange={handlePhoneNumberTextChange}
-            />
+            <formInputs.Provider value={{
+                labelName:"Phone Number:",
+                value:formFilds.phoneNumber,
+                handleChange:handlePhoneNumberTextChange,
+            }}>
+                <TextInputContainer />
+            </formInputs.Provider>
 
-            <TextInput 
-                labelName="Age:"
-                value={formFilds.age} 
-                handleChange={handleAgeTextChange}
-            />
+            <formInputs.Provider value={{
+                labelName:"Age:",
+                value:formFilds.age,
+                handleChange:handleAgeTextChange,
+            }}>
+                <TextInputContainer />
+            </formInputs.Provider>
 
             <label >Are you employeed?</label>
             <input className="checkBox" type="checkbox" checked={formFilds.isEmployeed}
